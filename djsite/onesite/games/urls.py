@@ -7,3 +7,4 @@ urlpatterns = [
     path('game/<slug:game>/', categories),
     re_path(r'^archive/(?P<year>[0-9]{4})/', archive),
 ]
+

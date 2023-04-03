@@ -1,7 +1,7 @@
 from django import template
 from games.models import *
 
-register = template.Library()\
+register = template.Library()
 
 @register.simple_tag(name='getcats')
 def get_categories():

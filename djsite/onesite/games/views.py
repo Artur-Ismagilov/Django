@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
+from .forms import *
 from .models import *
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
@@ -25,10 +26,11 @@ def index(request):
 def about(request):
     return render(request, 'games/about.html', {'menu': menu, 'title': 'О сайте'})
 
-def addpage(reqest):
-    return HttpResponse('Добавление статьи')
+def addpage(request):
+    form = AddPostForm()
+    return render(request, 'games/addpage.html', {'form': form, 'menu': menu, 'title': 'Добавление статьи'})
 
-def contact(reqest):
+def contact(request):
     return HttpResponse('Обратная связь')
 
 def login(request):

@@ -27,7 +27,18 @@ def about(request):
     return render(request, 'games/about.html', {'menu': menu, 'title': 'О сайте'})
 
 def addpage(request):
-    form = AddPostForm()
+
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            # print(form.cleaned_data)
+            try:
+                Games.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, 'Ошибка добавления поста')
+    else:
+        form = AddPostForm()
     return render(request, 'games/addpage.html', {'form': form, 'menu': menu, 'title': 'Добавление статьи'})
 
 def contact(request):
